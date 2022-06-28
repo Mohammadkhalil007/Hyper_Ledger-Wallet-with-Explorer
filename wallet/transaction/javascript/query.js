@@ -43,9 +43,9 @@ async function main() {
 
 
         // get all users
-        var result = await contract.evaluateTransaction('queryAllUsers');
-        console.log(`Users is fetched successfully, result is: ${result.toString()}`);
-        console.log("---------------------------------------------------------------");
+        // var result = await contract.evaluateTransaction('queryAllUsers');
+        // console.log(`Users is fetched successfully, result is: ${result.toString()}`);
+        // console.log("---------------------------------------------------------------");
 
 
         //get all wallets
@@ -57,27 +57,36 @@ async function main() {
       
  
         //get the wallets of specific user by userID
+
+       //user1
        
         var userID = "USER1";
+        console.log(`--------------------------${userID}----------------------------`);
         var getWallets = await contract.evaluateTransaction('queryWalletsByUser', userID);
         console.log(`Wallets Detail of ${userID}:`);
         console.log(`${getWallets.toString()}`);
-        console.log(`--------------------------${userID}----------------------------`);
-        var userID = "USER2";
-        var getWallets = await contract.evaluateTransaction('queryWalletsByUser', userID);
-        console.log(`Wallets Detail of ${userID}:`);
-        console.log(`${getWallets.toString()}`);
-        console.log(`--------------------------${userID}----------------------------`);
         
-        //amount transfer acknowledge 
+        //user2
+        var userID = "USER2";
+        console.log(`--------------------------${userID}----------------------------`);
+        var getWallets = await contract.evaluateTransaction('queryWalletsByUser', userID);
+        console.log(`Wallets Detail of ${userID}:`);
+        console.log(`${getWallets.toString()}`);
+        
+        
 
-        var senderWallet = "WALLET1"
-        var receiverWallet = "WALLET6"
+
+
+        console.log(`--------------------------checkWalletDetail----------------------------`);
+        //amount transfer acknowledge 
+        var senderWallet = "walletId1"
+        var receiverWallet = "walletId2"
         var result1 = await contract.evaluateTransaction('checkWalletDetail', senderWallet);
-        console.log(`${senderWallet} Detail After Transfer Amount, result is: ${result1.toString()}`);
+        console.log(`${senderWallet} account balance transfer to ${receiverWallet} and detail is::: ${result1.toString()}`);
+
         var result2 = await contract.evaluateTransaction('checkWalletDetail', receiverWallet);
-        console.log(`${receiverWallet} Detail After Getting Transfer Amount, result is: ${result2.toString()}`);
-        console.log('----------------------Transfer Amount Acknowledge------------------------');
+        console.log(`${receiverWallet} recieve amount from ${senderWallet} and detail is::: ${result2.toString()}`);
+
 
 
         

@@ -42,6 +42,12 @@ async function main() {
 
 
         /****************************************************User-Data************************************************/
+        // let userId = "USER"
+        // let user= {
+        //     "id": "USER",
+        //     "name": "khalil",
+        // }
+        
         let userId1 = "USER1"
         let user1 = {
             "id": "USER1",
@@ -53,26 +59,31 @@ async function main() {
             "name": "zohaib",
         }
         /***************************************************create users***********************************************/
+        //  await contract.submitTransaction('createUser', userId, JSON.stringify(user)); 
          await contract.submitTransaction('createUser', userId1, JSON.stringify(user1)); 
          await contract.submitTransaction('createUser', userId2, JSON.stringify(user2));
-         console.log("Users created Successfully!!")
+         console.log(`Users created Successfully----${user1.id} ----AND---- ${user2.id}`)
 
         /********************************************create Wallet for user ==>1***************************************/
     
         const wallet1 = [1,2,3,4,5];
         await Promise.all(
             wallet1.map(async (id) => {
-                await contract.submitTransaction('createWallet', `walletId${id}`, userId1, 50000)
-            })
+                await contract.submitTransaction('createWallet', `walletId${id}`, userId1, 50000);
+            })     
         )
+        console.log(`${wallet1.length} Wallets account are successfully created of user${userId1} :)`);
        /********************************************create Wallet for user ==>2****************************************/
         
        const wallet2 = [6,7,8,9,10];
        await Promise.all(
            wallet2.map(async (id) => {
-               await contract.submitTransaction('createWallet', `walletId${id}`, userId2, 50000)
+               await contract.submitTransaction('createWallet', `walletId${id}`, userId2, 50000);
            })
        )
+       console.log(`${wallet2.length} Wallets account are successfully created of user${userId2} :)`);
+
+
 
         // //  create user1 wallets
         /****************************************LOGIC=2***************************************/
@@ -113,10 +124,13 @@ async function main() {
 
         //  transfer amount from wallet1 to wallet2
         
+
+
+
       /********************************Amount Transfer from one wallet to another Wallet******************************/
         var senderWallet = "walletId1";
          var receiverWallet = "walletId2";
-         var amount =200;
+         var amount =2000;
          await contract.submitTransaction('transfer', senderWallet, receiverWallet, amount)
          console.log("Transfer Amount successfully from " + senderWallet + " to " + receiverWallet + " amount " + amount);
 

@@ -15,22 +15,24 @@ class Wallet extends Contract {
         await ctx.stub.putState("Test", "Wallet Logic")
         return "success"
     }
-                                              /*================User_Creation================*/
+                                                /*================User_Creation================*/
 
     async createUser(ctx, userId, userData){
        await ctx.stub.putState(userId, Buffer.from(JSON.stringify(userData)));
        console.info('============= User Created ===========');
     }
-    
 
-/*=================One_Call-Function=================*/
-// async callforUser(){
+    // async createUser(ctx, userId, userData){
+    //     if(userId!=await ctx.stub.getState(userId, Buffer.from(JSON.stringify(userData)))){
+    //      let newUser=await ctx.stub.putState(userId, Buffer.from(JSON.stringify(userData)));
+    //      console.log(newUser.toString());
+    //     }
+    //     else{
+    //         console.info('============= User Created ===========');
+    //     }
+    // }
 
-// }
-
-
-    
-                                              /*=================get single users wallets=================*/
+                                         /*=================get single users wallets=================*/
  
       async queryWalletsByUser(ctx, userId){
               let queryString = {};
@@ -39,7 +41,7 @@ class Wallet extends Contract {
               let result = await this.getIteratorData(iterator);
               return JSON.stringify(result);
             }
-async getIteratorData(iterator){
+      async getIteratorData(iterator){
                let resultArray = [];
                while(true){
                let res = await iterator.next();
@@ -81,7 +83,9 @@ async getIteratorData(iterator){
 //                  }
 //                  await ctx.stub.putState(walletId, Buffer.from(JSON.stringify(walletDetail)));
 // }
+ 
 
+                                                /*=================Create_Wallets=================*/
     async createWallet(ctx, walletKey, userKey, amount){
 
         // get the user from chaincode state
@@ -176,9 +180,6 @@ async getIteratorData(iterator){
     async transactionLog(ctx){
        const log=await ctx.stub.getState();
     }
-
-
-
 
                                             /*============check wallet  detail =============*/
 
