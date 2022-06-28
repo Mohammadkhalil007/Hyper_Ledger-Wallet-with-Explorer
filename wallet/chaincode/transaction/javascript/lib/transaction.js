@@ -32,6 +32,7 @@ class Wallet extends Contract {
     //     }
     // }
 
+
                                          /*=================get single users wallets=================*/
  
       async queryWalletsByUser(ctx, userId){
@@ -123,8 +124,8 @@ class Wallet extends Contract {
                                             /*=================Query_Wallets================*/
 
     async queryAllWallets(ctx){
-        const startKey = 'WALLET0';
-        const endKey = 'WALLET999';
+        const startKey = 'walletId0';
+        const endKey = 'walletId999';
         const allResults = [];
         for await (const {key, value} of ctx.stub.getStateByRange(startKey, endKey)) {
             const strValue = Buffer.from(value).toString('utf8');
